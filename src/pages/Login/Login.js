@@ -3,18 +3,19 @@ import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Alert  } from '@mui/material';
 import axios from 'axios';
 import LockIcon from '@mui/icons-material/Lock';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { control, handleSubmit, setError, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`${process.env.REACT_APP_TODO_API_URL}/api-token-auth/`, data);
       const token = response.data.token;
       localStorage.setItem('token', token);
-      console.log('Token:', token);
+      navigate("/list")
     } catch (error) {
-      console.error('Login failed:', error);
       setError('apiError', { message: 'Invalid username or password' });
     }
   };
@@ -67,8 +68,6 @@ const Login = () => {
     </form>
     </div>
     </>
-    
-    
   );
 };
 
