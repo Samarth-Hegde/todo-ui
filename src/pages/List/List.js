@@ -19,7 +19,7 @@ const TodoList = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`edit/${id}`)
+    navigate(`/edit/${id}`)
   };
 
   const handleDelete = (id) => {

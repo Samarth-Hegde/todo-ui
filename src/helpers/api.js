@@ -20,6 +20,22 @@ export const fetchTodos = async (token, sortOrder) => {
   });
 };
 
+export const fetchTodoById = async (token,todo_id) => {
+  const response = await fetch(`${baseUrl}/todos/${todo_id}/`, {
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Accept': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data
+}
+
 export const completeTodo = async (token, todo_id) => {
   const response = await fetch(`${baseUrl}/todos/${todo_id}/complete/`, {
     method: "POST",
@@ -51,15 +67,17 @@ export const deleteTodo = async (token, todo_id) => {
   return data
 };
 
-export const updateTodo = async (token,todo) => {
-  const body = todo 
-  const response = await fetch(`${baseUrl}/todos/`, {
-    method: "POST",
+export const updateTodo = async (token,todo,todo_id) => {
+  console.log("In todod")
+  const body = JSON.stringify(todo); 
+  const response = await fetch(`${baseUrl}/todos/${todo_id}/`, {
+    method: "PUT",
     headers: {
       'Authorization': `Token ${token}`,
       'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: JSON.parse(body)
+    body: body
   });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);

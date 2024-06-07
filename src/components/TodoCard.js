@@ -20,7 +20,6 @@ const TodoCard = ({ todo, onToggleCompleted, onEdit, onDelete }) => (
       checked={todo.completed}
       onChange={() => onToggleCompleted(todo.id, todo.completed)}
       className="mr-4"
-      disabled={todo.completed}
     />
     <CardContent className="flex flex-col flex-grow">
       <Typography variant="h6" className={todo.completed ? 'line-through text-gray-500' : ''}>
@@ -38,7 +37,7 @@ const TodoCard = ({ todo, onToggleCompleted, onEdit, onDelete }) => (
       <IconButton onClick={() => onEdit(todo.id)} disabled={todo.completed}>
         <EditIcon />
       </IconButton>
-      <IconButton onClick={() => onDelete(todo.id)} disabled={todo.completed}>
+      <IconButton onClick={() => onDelete(todo.id)}>
         <DeleteIcon className="text-red-500" />
       </IconButton>
     </div>
