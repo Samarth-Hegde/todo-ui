@@ -68,10 +68,27 @@ export const deleteTodo = async (token, todo_id) => {
 };
 
 export const updateTodo = async (token,todo,todo_id) => {
-  console.log("In todod")
   const body = JSON.stringify(todo); 
   const response = await fetch(`${baseUrl}/todos/${todo_id}/`, {
     method: "PUT",
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: body
+  });
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+  return data
+};
+
+export const createTodo = async (token,todo) => {
+  const body = JSON.stringify(todo); 
+  const response = await fetch(`${baseUrl}/todos/`, {
+    method: "POST",
     headers: {
       'Authorization': `Token ${token}`,
       'Accept': 'application/json',

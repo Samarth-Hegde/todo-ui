@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TodoCard from '../../components/TodoCard';
 import { useFetchTodos, useCompleteTodo, useDeleteTodo } from '../../helpers/queries';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 const TodoList = () => {
   const [sortOrder, setSortOrder] = useState('asc');
@@ -11,19 +12,26 @@ const TodoList = () => {
   const navigate = useNavigate();
 
   const completeTodoMutation = useCompleteTodo();
-  const deleteTodoMutation = useDeleteTodo()
-
+  const deleteTodoMutation = useDeleteTodo();
 
   const handleToggleCompleted = (id, completed) => {
     completeTodoMutation.mutate(id);
   };
 
   const handleEdit = (id) => {
-    navigate(`/edit/${id}`)
+    navigate(`/edit/${id}`);
   };
 
   const handleDelete = (id) => {
-    deleteTodoMutation.mutate(id)
+    deleteTodoMutation.mutate(id);
+  };
+
+  const handleCreateNew = () => {
+    navigate('/create');
+  };
+
+  const handleHistory = () => {
+    navigate('/history');
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -41,6 +49,14 @@ const TodoList = () => {
           <option value="asc">Sort by Created Date (Ascending)</option>
           <option value="desc">Sort by Created Date (Descending)</option>
         </select>
+      </div>
+      <div className="flex gap-2 items-center mb-4">
+        <Button variant="contained" color="primary" onClick={handleCreateNew}>
+          Create New Todo
+        </Button>
+        <Button variant="contained" color="primary" onClick={handleHistory}>
+          History
+        </Button>
       </div>
       <div className="flex flex-col gap-4">
         {todos.map((todo) => (
