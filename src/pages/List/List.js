@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import TodoCard from '../../components/TodoCard';
 import { useFetchTodos, useCompleteTodo, useDeleteTodo } from '../../helpers/queries';
+import { useNavigate } from 'react-router-dom';
 
 const TodoList = () => {
   const [sortOrder, setSortOrder] = useState('asc');
 
   const { data: todos = [], error, isLoading } = useFetchTodos(sortOrder);
+
+  const navigate = useNavigate();
+
   const completeTodoMutation = useCompleteTodo();
   const deleteTodoMutation = useDeleteTodo()
+
 
   const handleToggleCompleted = (id, completed) => {
     completeTodoMutation.mutate(id);
   };
 
   const handleEdit = (id) => {
-    console.log(`Edit todo ${id}`);
+    navigate(`edit/${id}`)
   };
 
   const handleDelete = (id) => {

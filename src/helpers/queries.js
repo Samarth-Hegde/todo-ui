@@ -1,5 +1,5 @@
 import { useQuery,useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchTodos,completeTodo, deleteTodo } from './api';
+import { fetchTodos,completeTodo, deleteTodo, updateTodo } from './api';
 
 export const useFetchTodos = (sortOrder) => {
   const token = localStorage.getItem('token');
@@ -31,6 +31,21 @@ export const useDeleteTodo = () => {
 
   return useMutation({
     mutationFn: (todo_id) => deleteTodo(token, todo_id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['todos']);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(['todos']);
+    },
+  });
+};
+
+export const useUpdateTodo = () => {
+  const queryClient = useQueryClient();
+  const token = localStorage.getItem('token');
+
+  return useMutation({
+    mutationFn: (todo_id,todo) => updateTodo(token,todo),
     onSuccess: () => {
       queryClient.invalidateQueries(['todos']);
     },

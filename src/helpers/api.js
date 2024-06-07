@@ -50,3 +50,20 @@ export const deleteTodo = async (token, todo_id) => {
   const data = await response.json();
   return data
 };
+
+export const updateTodo = async (token,todo) => {
+  const body = todo 
+  const response = await fetch(`${baseUrl}/todos/`, {
+    method: "POST",
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Accept': 'application/json',
+    },
+    body: JSON.parse(body)
+  });
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+  return data
+};

@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import TodoList from './pages/List/List';
+import EditTodo from './pages/Edit/Edit';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/list" element={<TodoList />} />
-        {/* Other routes */}
+        <Route path="/edit/:id" element={<EditTodo />} />
       </Routes>
     </div>
   );
