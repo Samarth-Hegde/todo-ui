@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 import TodoCard from '../../components/TodoCard';
-import { useFetchTodos, useCompleteTodo } from '../../helpers/queries';
+import { useFetchTodos, useCompleteTodo, useDeleteTodo } from '../../helpers/queries';
 
 const TodoList = () => {
   const [sortOrder, setSortOrder] = useState('asc');
-  const queryClient = useQueryClient();
 
   const { data: todos = [], error, isLoading } = useFetchTodos(sortOrder);
   const completeTodoMutation = useCompleteTodo();
+  const deleteTodoMutation = useDeleteTodo()
 
   const handleToggleCompleted = (id, completed) => {
     completeTodoMutation.mutate(id);
@@ -19,7 +18,7 @@ const TodoList = () => {
   };
 
   const handleDelete = (id) => {
-
+    deleteTodoMutation.mutate(id)
   };
 
   if (isLoading) return <div>Loading...</div>;

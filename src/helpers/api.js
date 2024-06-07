@@ -20,4 +20,33 @@ export const fetchTodos = async (token, sortOrder) => {
   });
 };
 
+export const completeTodo = async (token, todo_id) => {
+  const response = await fetch(`${baseUrl}/todos/${todo_id}/complete/`, {
+    method: "POST",
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Accept': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 
+  const data = await response.json();
+  return data
+};
+
+export const deleteTodo = async (token, todo_id) => {
+  const response = await fetch(`${baseUrl}/todos/${todo_id}/`, {
+    method: "DELETE",
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Accept': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+  return data
+};
