@@ -102,3 +102,34 @@ export const createTodo = async (token,todo) => {
   const data = await response.json();
   return data
 };
+
+export const fetchHistory = async (token) => {
+  const response = await fetch(`${baseUrl}/todos/history/`, {
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  });
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+  return data
+};
+
+export const undoHistory = async (token,history_id) => {
+  const response = await fetch(`${baseUrl}/todos/${history_id}/undo/`, {
+    method: "POST",
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  });
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+  return data
+};

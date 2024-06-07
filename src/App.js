@@ -5,7 +5,7 @@ import Login from './pages/Login/Login';
 import TodoList from './pages/List/TodoList';
 import EditTodo from './pages/Edit/EditTodo';
 import Create from './pages/Create/CreateTodo';
-import History from './pages/History/History';
+import History from './pages/History/TodoHistory';
 
 function App() {
   return (
