@@ -6,6 +6,7 @@ import TodoList from './pages/List/TodoList';
 import EditTodo from './pages/Edit/EditTodo';
 import Create from './pages/Create/CreateTodo';
 import History from './pages/History/TodoHistory';
+import Register from './pages/Register/Register';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/list" element={<TodoList />} />
         <Route path="/edit/:id" element={<EditTodo />} />
         <Route path="/create" element={<Create />} />

@@ -9,10 +9,14 @@ const Home = () => {
     navigate('/login');
   }
 
+  const handleRegister = () => {
+    navigate('/register');
+  }
+
   return (
     <div>
         <Button variant="contained" onClick={handleLogin}>Login</Button>
-        <Button variant="contained">Register</Button>
+        <Button variant="contained" onClick={handleRegister}>Register</Button>
     </div>
   )
 }

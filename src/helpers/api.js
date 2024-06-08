@@ -1,7 +1,7 @@
 const baseUrl = process.env.REACT_APP_TODO_API_URL;
 
 export const fetchTodos = async (token, sortOrder) => {
-  const response = await fetch(`${baseUrl}/todos/`, {
+  const response = await fetch(`${baseUrl}/app/todos/`, {
     headers: {
       'Authorization': `Token ${token}`,
       'Accept': 'application/json',
@@ -21,7 +21,7 @@ export const fetchTodos = async (token, sortOrder) => {
 };
 
 export const fetchTodoById = async (token,todo_id) => {
-  const response = await fetch(`${baseUrl}/todos/${todo_id}/`, {
+  const response = await fetch(`${baseUrl}/app/todos/${todo_id}/`, {
     headers: {
       'Authorization': `Token ${token}`,
       'Accept': 'application/json',
@@ -37,7 +37,7 @@ export const fetchTodoById = async (token,todo_id) => {
 }
 
 export const completeTodo = async (token, todo_id) => {
-  const response = await fetch(`${baseUrl}/todos/${todo_id}/complete/`, {
+  const response = await fetch(`${baseUrl}/app/todos/${todo_id}/complete/`, {
     method: "POST",
     headers: {
       'Authorization': `Token ${token}`,
@@ -53,7 +53,7 @@ export const completeTodo = async (token, todo_id) => {
 };
 
 export const deleteTodo = async (token, todo_id) => {
-  const response = await fetch(`${baseUrl}/todos/${todo_id}/`, {
+  const response = await fetch(`${baseUrl}/app/todos/${todo_id}/`, {
     method: "DELETE",
     headers: {
       'Authorization': `Token ${token}`,
@@ -69,7 +69,7 @@ export const deleteTodo = async (token, todo_id) => {
 
 export const updateTodo = async (token,todo,todo_id) => {
   const body = JSON.stringify(todo); 
-  const response = await fetch(`${baseUrl}/todos/${todo_id}/`, {
+  const response = await fetch(`${baseUrl}/app/todos/${todo_id}/`, {
     method: "PUT",
     headers: {
       'Authorization': `Token ${token}`,
@@ -87,7 +87,7 @@ export const updateTodo = async (token,todo,todo_id) => {
 
 export const createTodo = async (token,todo) => {
   const body = JSON.stringify(todo); 
-  const response = await fetch(`${baseUrl}/todos/`, {
+  const response = await fetch(`${baseUrl}/app/todos/`, {
     method: "POST",
     headers: {
       'Authorization': `Token ${token}`,
@@ -104,7 +104,7 @@ export const createTodo = async (token,todo) => {
 };
 
 export const fetchHistory = async (token) => {
-  const response = await fetch(`${baseUrl}/todos/history/`, {
+  const response = await fetch(`${baseUrl}/app/todos/history/`, {
     headers: {
       'Authorization': `Token ${token}`,
       'Accept': 'application/json',
@@ -119,7 +119,7 @@ export const fetchHistory = async (token) => {
 };
 
 export const undoHistory = async (token,history_id) => {
-  const response = await fetch(`${baseUrl}/todos/${history_id}/undo/`, {
+  const response = await fetch(`${baseUrl}/app/todos/${history_id}/undo/`, {
     method: "POST",
     headers: {
       'Authorization': `Token ${token}`,

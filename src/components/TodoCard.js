@@ -4,7 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutline from '@mui/icons-material/CheckCircleOutline';
 import RadioButtonUnchecked from '@mui/icons-material/RadioButtonUnchecked';
-import ConfirmDialog from './ConfirmDialog'; // Import the ConfirmDialog component
+import ConfirmDialog from './ConfirmDialog';
 
 const trimText = (text, maxLength) => {
   if (text.length > maxLength) {

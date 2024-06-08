@@ -5,7 +5,7 @@ import axios from "axios";
 import LockIcon from "@mui/icons-material/Lock";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const {
     control,
     handleSubmit,
@@ -17,32 +17,34 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_TODO_API_URL}/api-token-auth/`,
+        `${process.env.REACT_APP_TODO_API_URL}/register/users/`,
         data
       );
-      const token = response.data.token;
-      localStorage.setItem("token", token);
-      navigate("/list");
+      alert("Registration successful");
+      navigate("/login");
     } catch (error) {
-      setError("apiError", { message: "Invalid username or password" });
+      setError("registrationError", {
+        message: "Registration failed. Please try again.",
+      });
     }
   };
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center w-screen h-screen ">
+      <div className="flex flex-col justify-center items-center w-screen h-screen">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col  w-6/12"
+          className="flex flex-col w-6/12"
         >
           <div className="w-full flex justify-center items-center">
-            <p className="font-semibold text-xl">Sign In to Your Account </p>
+            <p className="font-semibold text-xl">Create a new account</p>
             <LockIcon className="m-3" />
           </div>
           <Controller
             name="username"
             control={control}
             defaultValue=""
+            rules={{ required: "Username is required" }}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -53,10 +55,12 @@ const Login = () => {
               />
             )}
           />
+          {errors.username && <span>{errors.username.message}</span>}
           <Controller
             name="password"
             control={control}
             defaultValue=""
+            rules={{ required: "Password is required" }}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -68,9 +72,10 @@ const Login = () => {
               />
             )}
           />
-          {errors.apiError && (
+          {errors.password && <span>{errors.password.message}</span>}
+          {errors.registrationError && (
             <Alert severity="error" className="mb-4">
-              {errors.apiError.message}
+              {errors.registrationError.message}
             </Alert>
           )}
           <div className="flex justify-between items-center">
@@ -79,12 +84,12 @@ const Login = () => {
               variant="contained"
               className="w-3/12 !bg-green-400 text !normal-case !rounded-full !mt-3"
             >
-              Login
+              Register
             </Button>
             <p>
-              Dont have an account?{" "}
-              <Link to="/register" className="text-blue-600">
-                Register
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-600">
+                login
               </Link>
             </p>
           </div>
@@ -94,4 +99,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
