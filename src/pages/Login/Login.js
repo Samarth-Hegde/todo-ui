@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { TextField, Button, Alert } from "@mui/material";
 import axios from "axios";
@@ -9,10 +9,13 @@ const Login = () => {
   const {
     control,
     handleSubmit,
-    setError,
+    clearErrors,
+    reset,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+
+  const [error,setError] = useState()
 
   const onSubmit = async (data) => {
     try {
@@ -22,11 +25,17 @@ const Login = () => {
       );
       const token = response.data.token;
       localStorage.setItem("token", token);
+      reset();
       navigate("/list");
     } catch (error) {
-      setError("apiError", { message: "Invalid username or password" });
+      setError({ message: "Invalid username or password" });
+      
     }
   };
+
+  useEffect(() => {
+    clearErrors();
+  }, [clearErrors]);
 
   return (
     <>
@@ -68,9 +77,9 @@ const Login = () => {
               />
             )}
           />
-          {errors.apiError && (
+          {error && (
             <Alert severity="error" className="mb-4">
-              {errors.apiError.message}
+              {error.message}
             </Alert>
           )}
           <div className="flex justify-between items-center">

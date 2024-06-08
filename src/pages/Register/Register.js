@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { TextField, Button, Alert } from "@mui/material";
 import axios from "axios";
@@ -9,10 +9,11 @@ const Register = () => {
   const {
     control,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+
+  const [error,setError] = useState()
 
   const onSubmit = async (data) => {
     try {
@@ -23,7 +24,7 @@ const Register = () => {
       alert("Registration successful");
       navigate("/login");
     } catch (error) {
-      setError("registrationError", {
+      setError( {
         message: "Registration failed. Please try again.",
       });
     }
@@ -72,10 +73,9 @@ const Register = () => {
               />
             )}
           />
-          {errors.password && <span>{errors.password.message}</span>}
-          {errors.registrationError && (
+          {error && (
             <Alert severity="error" className="mb-4">
-              {errors.registrationError.message}
+              {error.message}
             </Alert>
           )}
           <div className="flex justify-between items-center">
